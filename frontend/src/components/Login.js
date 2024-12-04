@@ -75,7 +75,7 @@ const Login = () => {
     if (isValid) {
       setLoading(true);
       try {
-        const response = await fetch('http://localhost:3000/api/auth/login', {
+        const response = await fetch(`${process.env.REACT_APP_API_URL || 'http://localhost:3000'}/api/auth/login`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -127,7 +127,7 @@ const Login = () => {
   };
   const handleLogout = async () => {
     try {
-      await fetch('http://localhost:3000/api/auth/logout', { method: 'POST', credentials: 'include' });
+      await fetch(`${process.env.REACT_APP_API_URL || 'http://localhost:3000'}/api/auth/logout`, { method: 'POST', credentials: 'include' });
       localStorage.removeItem('authToken');
       localStorage.removeItem('token'); // Correct key name
       alert('Logged out successfully!');

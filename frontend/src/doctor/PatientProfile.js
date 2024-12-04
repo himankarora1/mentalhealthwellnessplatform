@@ -13,10 +13,10 @@ const PatientProfile = () => {
     const fetchPatientData = async () => {
       try {
         const patientResponse = await fetch(
-          `http://localhost:3000/api/users/patients/${patientId}`
+          `${process.env.REACT_APP_API_URL || 'http://localhost:3000'}/api/users/patients/${patientId}`
         ); // Replace with your API endpoint for fetching patient details
         const appointmentResponse = await fetch(
-          `http://localhost:3000/api/appointments/patient/${patientId}`
+          `${process.env.REACT_APP_API_URL || 'http://localhost:3000'}/api/appointments/patient/${patientId}`
         ); // Replace with your API endpoint for appointments
 
         if (patientResponse.ok) {

@@ -39,7 +39,7 @@ const BookingPage = () => {
         }));
   
         // Fetch assigned doctor
-        const doctorResponse = await fetch(`http://localhost:3000/api/mappings/${patientId}`);
+        const doctorResponse = await fetch(`${process.env.REACT_APP_API_URL || 'http://localhost:3000'}/api/mappings/${patientId}`);
         if (doctorResponse.ok) {
           const doctor = await doctorResponse.json();
           setAssignedDoctor(doctor); // Set assigned doctor
@@ -51,7 +51,7 @@ const BookingPage = () => {
   
           // Fetch all available slots for the doctor
           const response = await fetch(
-            `http://localhost:3000/api/doctors/${doctor._id}/slots`
+            `${process.env.REACT_APP_API_URL || 'http://localhost:3000'}/api/doctors/${doctor._id}/slots`
           );
           const slots = await response.json();
           setAvailableSlots(slots); // Store all slots initially
@@ -108,7 +108,7 @@ const BookingPage = () => {
       };
   
       // Make the API request to save the booking
-      const response = await fetch(`http://localhost:3000/api/doctors/${selectedDoctor}/bookings`, {
+      const response = await fetch(`${process.env.REACT_APP_API_URL || 'http://localhost:3000'}/api/doctors/${selectedDoctor}/bookings`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(requestBody),

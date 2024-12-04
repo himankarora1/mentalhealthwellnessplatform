@@ -10,7 +10,7 @@ const ManageDoctors = () => {
   useEffect(() => {
     const fetchDoctors = async () => {
       try {
-        const response = await fetch("http://localhost:3000/api/doctors"); // Ensure this endpoint filters by role
+        const response = await fetch(`${process.env.REACT_APP_API_URL || 'http://localhost:3000'}/api/doctors`); // Ensure this endpoint filters by role
         if (!response.ok) {
           throw new Error("Failed to fetch doctors.");
         }
@@ -29,7 +29,7 @@ const ManageDoctors = () => {
   const handleDeleteDoctor = async (id) => {
     if (window.confirm("Are you sure you want to delete this doctor?")) {
       try {
-        const response = await fetch(`http://localhost:3000/api/doctors/delete/${id}`, {
+        const response = await fetch(`${process.env.REACT_APP_API_URL || 'http://localhost:3000'}/api/doctors/delete/${id}`, {
           method: "DELETE",
         });
 

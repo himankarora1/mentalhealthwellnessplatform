@@ -71,20 +71,40 @@ The Mental Wellness platform is a comprehensive solution designed to provide men
    ```
 3. Set up environment variables in a `.env` file:
    ```env
-   PORT=5000
+   PORT=3000
    MONGO_URI=<your_mongo_db_connection_string>
    JWT_SECRET=<your_jwt_secret>
+   EMAIL=<your_email>
+   EMAIL_PASSWORD=<your_email_app_password>
    ```
 4. Start the backend server:
    ```bash
    npm start
    ```
-5. Start the frontend:
+5. Set up the frontend's environment variable in `frontend/.env`:
+   ```env
+   REACT_APP_API_URL=http://localhost:3000
+   ```
+6. Start the frontend:
    ```bash
    cd frontend
    npm start
    ```
-6. Access the application at `http://localhost:3000`.
+7. Access the application at `http://localhost:3001` (or whichever port React's dev server picks — the backend runs on 3000).
 
+## Deployment
 
+This app deploys as two separate services:
+
+**Backend (Render, Railway, or similar):**
+- Root directory: `backend`
+- Build command: `npm install`
+- Start command: `npm start`
+- Environment variables: `MONGO_URI`, `JWT_SECRET`, `PORT`, `EMAIL`, `EMAIL_PASSWORD` (use a hosted MongoDB Atlas connection string, not `localhost`)
+
+**Frontend (Vercel):**
+- Root directory: `frontend`
+- Environment variable: `REACT_APP_API_URL` set to your deployed backend's URL (e.g. `https://your-backend.onrender.com`)
+
+The frontend reads `REACT_APP_API_URL` at build time and falls back to `http://localhost:3000` if unset, so local development works unchanged.
 

@@ -31,7 +31,7 @@ const DoctorHome = () => {
 
         const today = new Date().toISOString().split("T")[0]; // Get today's date in YYYY-MM-DD format
         const response = await axios.get(
-          `http://localhost:3000/api/doctors/${doctorId}/bookings`
+          `${process.env.REACT_APP_API_URL || 'http://localhost:3000'}/api/doctors/${doctorId}/bookings`
         );
 
         const todayAppointments = response.data.filter(

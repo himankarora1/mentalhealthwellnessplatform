@@ -32,7 +32,7 @@ const UpcomingAppointments = () => {
           return;
         }
   
-        const response = await axios.get(`http://localhost:3000/api/doctors/${doctorId}/bookings`);
+        const response = await axios.get(`${process.env.REACT_APP_API_URL || 'http://localhost:3000'}/api/doctors/${doctorId}/bookings`);
         setAppointments(response.data);
       } catch (error) {
         console.error("Error fetching appointments:", error.response?.data || error.message);
@@ -52,7 +52,7 @@ const UpcomingAppointments = () => {
           return;
         }
   
-        const response = await axios.get(`http://localhost:3000/api/doctors/${doctorId}/slots`);
+        const response = await axios.get(`${process.env.REACT_APP_API_URL || 'http://localhost:3000'}/api/doctors/${doctorId}/slots`);
         setSlots(response.data);
       } catch (error) {
         console.error("Error fetching slots:", error.response?.data || error.message);
@@ -66,7 +66,7 @@ const UpcomingAppointments = () => {
   const handleCreateSlot = async () => {
     try {
       const response = await axios.post(
-        `http://localhost:3000/api/doctors/${doctorId}/slots`,
+        `${process.env.REACT_APP_API_URL || 'http://localhost:3000'}/api/doctors/${doctorId}/slots`,
         { date: selectedDate, startTime, endTime }
       );
       alert("Slot created successfully!");

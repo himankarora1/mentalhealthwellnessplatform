@@ -31,7 +31,7 @@ const PatientList = () => {
 
       try {
         console.log(`Fetching patients for doctorId: ${doctorId}`); // Debugging log
-        const response = await axios.get(`http://localhost:3000/api/users/doctors/${doctorId}/patients`);
+        const response = await axios.get(`${process.env.REACT_APP_API_URL || 'http://localhost:3000'}/api/users/doctors/${doctorId}/patients`);
         
         if (response.status === 200) {
           console.log("Fetched patients:", response.data); // Debugging log

@@ -10,15 +10,15 @@ const ManagePatients = () => {
     const fetchPatientsAndMappings = async () => {
       try {
         // Fetch patients
-        const patientsResponse = await fetch("http://localhost:3000/api/users/patients");
+        const patientsResponse = await fetch(`${process.env.REACT_APP_API_URL || 'http://localhost:3000'}/api/users/patients`);
         const patientsData = await patientsResponse.json();
         
         // Fetch mappings
-        const mappingsResponse = await fetch("http://localhost:3000/api/mappings");
+        const mappingsResponse = await fetch(`${process.env.REACT_APP_API_URL || 'http://localhost:3000'}/api/mappings`);
         const mappingsData = await mappingsResponse.json();
         
         // Fetch doctors
-        const doctorsResponse = await fetch("http://localhost:3000/api/users/doctors");
+        const doctorsResponse = await fetch(`${process.env.REACT_APP_API_URL || 'http://localhost:3000'}/api/users/doctors`);
         const doctorsData = await doctorsResponse.json();
         
         // Combine mappings into patient data
@@ -42,7 +42,7 @@ const ManagePatients = () => {
   // Assign a doctor to a patient
   const handleAssignDoctor = async (patientId, doctorId) => {
     try {
-      const response = await fetch(`http://localhost:3000/api/users/assign-doctor/${patientId}`, {
+      const response = await fetch(`${process.env.REACT_APP_API_URL || 'http://localhost:3000'}/api/users/assign-doctor/${patientId}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
