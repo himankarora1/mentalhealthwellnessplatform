@@ -16,7 +16,7 @@ const app = express();
 
 // CORS Configuration
 app.use(cors({
-    origin: 'http://localhost:3001', // Replace with frontend origin
+    origin: process.env.FRONTEND_URL || 'http://localhost:3001',
     methods: ['GET', 'POST', 'PATCH', 'DELETE'], // Added PATCH for the new route
     allowedHeaders: ['Content-Type', 'Authorization'],
 }));
@@ -30,7 +30,6 @@ app.use('/api/auth', authRoutes);
 app.use('/api/appointments', appointmentRoutes);
 app.use("/api/doctors", doctorRoutes);
 app.use("/api/mappings", mappingRoutes); // Add the doctor-patient mapping routes
-app.use('/api/users', userRoutes);
 
 // Root endpoint for testing
 app.get('/', (req, res) => {
