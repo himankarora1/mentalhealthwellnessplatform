@@ -125,18 +125,6 @@ const Login = () => {
       }
     }
   };
-  const handleLogout = async () => {
-    try {
-      await fetch(`${process.env.REACT_APP_API_URL || 'http://localhost:3000'}/api/auth/logout`, { method: 'POST', credentials: 'include' });
-      localStorage.removeItem('authToken');
-      localStorage.removeItem('token'); // Correct key name
-      alert('Logged out successfully!');
-      navigate('/login');
-    } catch (error) {
-      console.error('Logout failed:', error);
-      alert('Failed to log out. Please try again.');
-    }
-  };
   return (
     <>
       {/* Include the Navigation component */}

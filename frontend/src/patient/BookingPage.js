@@ -1,4 +1,4 @@
-import React, { useState, useEffect , Button } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import PatientNavBar from "./PatientNavBar";
 
@@ -16,7 +16,6 @@ const BookingPage = () => {
   const [availableSlots, setAvailableSlots] = useState([]);
   const [selectedDoctor, setSelectedDoctor] = useState("");
   const [selectedDate, setSelectedDate] = useState("");
-  const [bookingId, setBookingId] = useState(null);
   const [assignedDoctor, setAssignedDoctor] = useState(null);
 
   
@@ -77,6 +76,11 @@ const BookingPage = () => {
       console.log("No slots available for the selected date.");
       setAvailableSlots([]);
     }
+  // Note: intentionally omitting `availableSlots` from deps below.
+  // This effect both reads and updates `availableSlots`, so including it
+  // would cause an infinite re-render loop. Only re-filter when the
+  // selected date changes.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedDate]); // Runs whenever `selectedDate` changes
  
   const handleSubmit = async (e) => {
@@ -118,7 +122,6 @@ const BookingPage = () => {
   
       if (response.ok) {
         alert("Appointment booked successfully!");
-        setBookingId(data.booking._id); // Set the booking ID
         navigate(`/dashboard`); // Navigate to the appointments page or payment if applicable
       } else {
         alert(data.error || "Failed to book appointment. Please try again.");
